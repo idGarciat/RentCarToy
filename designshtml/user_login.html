@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Toy Car Rental Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b8cee",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "charcoal": "#212529",
+              "accent-orange": "#FFA500"
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display">
+<div class="relative flex min-h-screen w-full flex-col items-center justify-center bg-background-light dark:bg-background-dark p-4 group/design-root overflow-hidden">
+<div class="absolute inset-0 z-0 opacity-10 dark:opacity-5">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" data-alt="Faint abstract graphic of tire tracks on a racetrack." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFMN_hZUuZwGbEP8MqGPwhthqlZWNrXuy2pHrMZl4oaLuHw1wk0j5kiJyDOsCk_AsQRJ6-_MUHNmCZMXahC0vZHx_swJ2TSpir27Jdl1N7Ay_uI7i8_cNLY6WkPiVr0xWNN99Xny3igdrHxokSWrEUL-sXJz3t8ZtpK5TCTOxNen0rUrsdxIOdI4HOGSLUu1EpXAp4yDg7chRmBjB0joK6AU0pVkHvz_hOs-Bm0yz5i_PjEQib93GzSGGLjWMbKz7HLtGylUU-gg"); mask-image: radial-gradient(circle, white 50%, transparent 100%); -webkit-mask-image: radial-gradient(circle, white 50%, transparent 100%);'></div>
+</div>
+<div class="relative z-10 flex w-full max-w-md flex-col items-center rounded-xl bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-6 sm:p-8">
+<!-- Logo -->
+<div class="flex items-center justify-center w-16 h-16 rounded-full bg-primary mb-6">
+<span class="material-symbols-outlined text-white text-4xl">directions_car</span>
+</div>
+<!-- Headline Text -->
+<h1 class="text-charcoal dark:text-white tracking-tight text-3xl font-bold leading-tight text-center pb-2">Welcome Back!</h1>
+<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal leading-normal text-center mb-8">Log in to continue your adventure.</p>
+<div class="w-full space-y-4">
+<!-- Email TextField -->
+<label class="flex w-full flex-col">
+<p class="text-charcoal dark:text-white text-sm font-medium leading-normal pb-2">Email Address</p>
+<div class="flex w-full flex-1 items-stretch rounded-lg">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-charcoal dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-zinc-300 dark:border-zinc-700 bg-white/50 dark:bg-zinc-900/50 h-12 placeholder:text-zinc-500 dark:placeholder:text-zinc-500 px-4 text-base font-normal leading-normal" placeholder="Enter your email" value=""/>
+</div>
+</label>
+<!-- Password TextField -->
+<label class="flex w-full flex-col">
+<div class="flex justify-between items-baseline pb-2">
+<p class="text-charcoal dark:text-white text-sm font-medium leading-normal">Password</p>
+<!-- Forgot Password Link -->
+<a class="text-primary hover:underline text-sm font-medium leading-normal" href="#">Forgot Password?</a>
+</div>
+<div class="flex w-full flex-1 items-stretch rounded-lg">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-charcoal dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-zinc-300 dark:border-zinc-700 bg-white/50 dark:bg-zinc-900/50 h-12 placeholder:text-zinc-500 dark:placeholder:text-zinc-500 p-4 pr-12 text-base font-normal leading-normal" placeholder="Enter your password" type="password" value=""/>
+<button class="absolute inset-y-0 right-0 flex items-center pr-4 text-zinc-500 dark:text-zinc-400 hover:text-primary dark:hover:text-primary">
+<span class="material-symbols-outlined text-2xl">visibility</span>
+</button>
+</div>
+</label>
+</div>
+<!-- Primary Button -->
+<button class="flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-primary px-5 py-3 text-base font-semibold leading-normal text-white mt-6 hover:bg-primary/90 transition-colors">
+                Log In
+            </button>
+<!-- Divider -->
+<div class="flex w-full items-center gap-4 py-6">
+<hr class="w-full border-t border-zinc-300 dark:border-zinc-700"/>
+<p class="flex-shrink-0 text-sm font-medium text-zinc-500 dark:text-zinc-400">or</p>
+<hr class="w-full border-t border-zinc-300 dark:border-zinc-700"/>
+</div>
+<!-- Social Login Buttons -->
+<div class="grid w-full grid-cols-3 gap-3">
+<button class="flex h-12 items-center justify-center rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white/50 dark:bg-zinc-900/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+<img alt="Google logo" class="h-6 w-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALI_JxnrFVALpQ7pgqLtLa17S9vgWEu0fGdjEqux7cvJHrgXSAoa_0yBNOgZuusUaAWZPvW46mOQGKGKHeZet9k3U0vmi73Beqp3NFiXeqfUcdlQ-74EBUW2sLQs2qoR6ayAxRJTOtSXKmmYBUO3YNt_Qbr0_aM7LA62DjFKHFxYDx-gMQNKQGkwzOg3vzP65vrJbIhQFDLDGVgAMRBG_Ybm7iSZvKf5be31_jZeCJvD1RpZeA071vmwIGhbmsksdZfwnRXOWoGw"/>
+</button>
+<button class="flex h-12 items-center justify-center rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white/50 dark:bg-zinc-900/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+<img alt="Apple logo" class="h-6 w-6 dark:invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL-AqvatfSgpNsn0DLcXGPCTUyHoL4UFb1Xgt45oFBD7xfmTZDmAjJZJWgohIkwzbEidGksDbnw6BI5wDdGkw8PWSVrlUxVXiTzBZIG6hI-COE1K7aJbVMBGX_OvfbjbWvSnx7FBZsMU7sZs8SgWqYkVIX7VUx7Hod4stUeZDzWIc4PXKuR5SfOtKlm68pc-TEVk7wczOsEwk1k2QJsYv_z9KT3_J831GmNk1k4kOQrmWSKKTEcerlIzwpLDgJUtP4wuTlEh3dVA"/>
+</button>
+<button class="flex h-12 items-center justify-center rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white/50 dark:bg-zinc-900/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+<img alt="Facebook logo" class="h-6 w-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJuJw-Ne2FC3bdilYVrU-u0vfDGpHBuo5m-AC0onwdhqBx3XwXrY9WkWqUgKU1Gm12li7QBGzPEMcfy1gvq2ZPb_OP0ccIcA0n7rHwjtfvo5NJ7X3Fc20S9QoNCVIyEqp_QuaXcR2hnxHSxCHJ6QC1mJQYsPZ-BjFsjxHhMMxX00J1KlFDi6rMuXexzxjh4jtvmWPY1ktulG8xgK_-EODl4GwD9x6PlWWBW9JTeaLqMYoYZWvKmolLFAA5RGLPpoM2Nni3gfYdVg"/>
+</button>
+</div>
+<!-- Sign-up Link -->
+<p class="text-zinc-600 dark:text-zinc-400 text-sm font-normal leading-normal pt-8 text-center">
+                Don't have an account? <a class="font-bold text-primary hover:underline" href="#">Sign Up</a>
+</p>
+</div>
+</div>
+</body></html>
