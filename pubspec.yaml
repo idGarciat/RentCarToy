@@ -9,7 +9,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_fonts: ^5.0.0
+  google_fonts: ^4.0.4  # Downgrade para compatibilidad
+  flutter_mjpeg: ^2.0.1
+  flutter_dotenv: ^6.0.0
+
+  permission_handler: ^11.4.0
+  http: ^0.13.6
+  provider: ^6.1.1
+  shared_preferences: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -18,3 +25,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - .env

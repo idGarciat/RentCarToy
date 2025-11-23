@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mjpeg/flutter_mjpeg.dart';
 import '../models/car.dart';
 
 class ControlScreen extends StatefulWidget {
@@ -14,12 +15,18 @@ class ControlScreen extends StatefulWidget {
 class _ControlScreenState extends State<ControlScreen> {
   double _speed = 50;
   final List<String> _logs = [];
+  Car get car => widget.car !;
+
   // Joystick state for game-like controls
   Offset _joyOffset = Offset.zero;
   final double _joyMax = 32.0; // maximum thumb displacement (smaller)
 
   void _send(String cmd) {
     final entry = '${DateTime.now().toIso8601String().substring(11, 19)}: $cmd @ speed ${_speed.toStringAsFixed(0)}%';
+    // print(  entry);
+    
+    //TODO
+    //implemtar el las llamdas al coche
     setState(() {
       _logs.insert(0, entry);
     });
@@ -32,6 +39,7 @@ class _ControlScreenState extends State<ControlScreen> {
       child: Container(
         width: 44,
         height: 44,
+        // ignore: deprecated_member_use
         decoration: BoxDecoration(color: Colors.black.withOpacity(0.3), borderRadius: BorderRadius.circular(999)),
         child: Icon(icon, color: Colors.white),
       ),
@@ -64,8 +72,8 @@ class _ControlScreenState extends State<ControlScreen> {
             _joyOffset = Offset.fromDirection(_joyOffset.direction, _joyMax);
           }
           // Send continuous command (directional)
-          final dx = _joyOffset.dx;
-          final dy = -_joyOffset.dy; // invert Y to match typical forward = up
+          final dx = _joyOffset.dx / _joyMax * 100;
+          final dy = -_joyOffset.dy / _joyMax * 100; // invert Y to match typical forward = up
           _send('JOY ${dx.toStringAsFixed(0)},${dy.toStringAsFixed(0)}');
         });
       },
@@ -132,11 +140,22 @@ class _ControlScreenState extends State<ControlScreen> {
   Widget build(BuildContext context) {
   final size = MediaQuery.of(context).size;
     // Background / video feed
+    final stream = 'http://192.168.100.124:81/stream';
     final background = Positioned.fill(
-      child: Image.network(
-        'https://via.placeholder.com/1200x800',
+      child: Mjpeg(
+        isLive: true,
         fit: BoxFit.cover,
-      ),
+        stream: stream,
+        error: (context, error, stackTrace) {
+          return Center(
+            child: Text(
+              'Error loading video stream.',
+              // ignore: deprecated_member_use
+              style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 16),
+            ),
+          );
+        },
+      )
     );
 
     // Gradient overlay to improve readability of controls
