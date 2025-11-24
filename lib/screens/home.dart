@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
-import '../services/auth.dart';
+import 'package:rentcar/auth/auth.dart';
+import 'package:rentcar/classes/session_manager.dart';
+import '../services/auth_service.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final AuthService _authService = AuthService();
+  final SessionManager _sessionManager = SessionManager();
+  Auth? auth;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSession();
+  }
+
+  Future<void> _loadSession() async {
+    auth = await _sessionManager.getSession();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    final username = AuthService.user.value?.username ?? 'Guest';
+    final username = auth?.user?.username ?? 'Universitario Desconcido';
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0, title: const Text('Find a Car')),
       drawer: Drawer(
@@ -14,7 +36,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             UserAccountsDrawerHeader(
               accountName: Text(username),
-              accountEmail: Text(AuthService.user.value?.email ?? ''),
+              accountEmail: Text(auth?.user?.email ?? 'no email'),
             ),
             ListTile(
               leading: const Icon(Icons.directions_car),
@@ -31,7 +53,7 @@ class HomeScreen extends StatelessWidget {
               leading: const Icon(Icons.logout),
               title: const Text('Logout'),
               onTap: () {
-                AuthService.logout();
+                _authService.logout();
                 Navigator.of(context).pushNamedAndRemoveUntil('/login', (_) => false);
               },
             )
@@ -91,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                                 const SizedBox(height: 4),
                                 Text('${c['distance']} · ${c['price']}', style: const TextStyle(color: Colors.grey)),
                                 const SizedBox(height: 8),
-                                ElevatedButton(onPressed: () => Navigator.of(context).pushNamed('/control', arguments: null), child: const Text('Rent Now'))
+                                ElevatedButton(onPressed: () => Navigator.of(context).pushNamed('/control', arguments: c), child: const Text('Rent Now'))
                               ]),
                             ),
                             const SizedBox(width: 12),

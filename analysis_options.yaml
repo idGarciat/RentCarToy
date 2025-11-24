@@ -3,4 +3,5 @@ analyzer:
   errors:
     avoid_print: ignore
     unnecessary_brace_in_string_interps: ignore
+    unused_field: ignore
     unused_local_variable: ignore

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:rentcar/auth/auth.dart';
+import 'package:rentcar/classes/session_manager.dart';
 import 'package:rentcar/models/car.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,8 +25,12 @@ class CarsService {
 
   Future<List<Car>> getAvaibleCars() async {
     try {
-      var request = http.Request("GET", Uri.parse('$_baseUrl/cars/avibles'));
+      Auth? auth = await SessionManager.getInstance()?.getSession();
+      String token = auth?.accessToken ?? "";
+
+      var request = http.Request("GET", Uri.parse('$_baseUrl/cars/avaibles'));
       request.headers["Accept"] = 'application/json';
+      request.headers["Authorization"] = "Bearer $token";
 
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
@@ -45,8 +51,12 @@ class CarsService {
 
   Future<List<Car>> getCars() async {
     try {
+      Auth? auth = await SessionManager.getInstance()?.getSession();
+      String token = auth?.accessToken ?? "";
       var request = http.Request("GET", Uri.parse('$_baseUrl/cars'));
       request.headers["Accept"] = 'application/json';
+      request.headers["Authorization"] = "Bearer $token";
+
 
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
@@ -67,8 +77,13 @@ class CarsService {
 
   Future<Car> getCarById(String id) async {
     try {
+      Auth? auth = await SessionManager.getInstance()?.getSession();
+      String token = auth?.accessToken ?? "";
+
       var request = http.Request("GET", Uri.parse('$_baseUrl/cars/$id'));
       request.headers["Accept"] = 'application/json';
+      request.headers["Authorization"] = "Bearer $token";
+
 
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
@@ -88,8 +103,7 @@ class CarsService {
   }
   void sendStop() async{
     try {
-      String ipCar = "192.168.100.124";
-      final url = Uri.parse("http://$ipCar/stop?speed=0");
+      final url = Uri.parse("http://$_ipCar/stop?speed=0");
       final response = await http.get(url);
       print("RESPUESTA: ${response.body}");
     } catch (e) {
@@ -98,8 +112,6 @@ class CarsService {
   }
 
   void sendCommand(double x, double y) async {
-    String ipCar = "192.168.100.124";
-
     if(DateTime.now().difference(lastSend).inMilliseconds < 150) {
       return;
     }
@@ -133,10 +145,10 @@ class CarsService {
         command = "left";
       }
 
-      final url = Uri.parse("http://$ipCar/$command?speed=$speed");
+      final url = Uri.parse("http://$_ipCar/$command?speed=$speed");
       final response = await http.get(url);
       print("RESPUESTA: ${response.body}");
-      
+
     } catch (e) {
       print('Error al enviar el comando: $e');
     }

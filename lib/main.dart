@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'models/car.dart';
-import 'services/auth.dart';
+import 'services/auth_service.dart';
 import 'screens/login.dart';
 import 'screens/home.dart';
 import 'screens/profile.dart';
@@ -21,9 +21,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: AuthService.user,
+      valueListenable: AuthService().user,
       builder: (context, value, _) {
-        final initial = AuthService.user.value == null ? '/login' : '/home';
+        final initial = AuthService().user.value == null ? '/login' : '/home';
         return MaterialApp(
           title: 'RentCar (toy)',
           theme: lightTheme,
@@ -32,8 +32,8 @@ class MainApp extends StatelessWidget {
           initialRoute: initial,
           routes: {
             '/login': (c) => const LoginScreen(),
-            '/home': (c) => const HomeScreen(),
-            '/profile': (c) => const ProfileScreen(),
+            '/home': (c) => HomeScreen(),
+            '/profile': (c) =>ProfileScreen(),
             '/cars': (c) => CarsScreen(),
           },
           onGenerateRoute: (settings) {
