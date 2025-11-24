@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mjpeg/flutter_mjpeg.dart';
+import 'package:rentcar/services/cars_service.dart';
 import '../models/car.dart';
 
 class ControlScreen extends StatefulWidget {
   final Car? car;
 
-  const ControlScreen({Key? key, this.car}) : super(key: key);
+  const ControlScreen({super.key, this.car});
 
   @override
   State<ControlScreen> createState() => _ControlScreenState();
 }
 
 class _ControlScreenState extends State<ControlScreen> {
-  double _speed = 50;
+  final carService = CarsService();
+  final double _speed = 50;
   final List<String> _logs = [];
-  Car get car => widget.car !;
+  
 
   // Joystick state for game-like controls
   Offset _joyOffset = Offset.zero;
@@ -24,9 +26,10 @@ class _ControlScreenState extends State<ControlScreen> {
   void _send(String cmd) {
     final entry = '${DateTime.now().toIso8601String().substring(11, 19)}: $cmd @ speed ${_speed.toStringAsFixed(0)}%';
     // print(  entry);
-    
+      
     //TODO
     //implemtar el las llamdas al coche
+
     setState(() {
       _logs.insert(0, entry);
     });
@@ -49,6 +52,7 @@ class _ControlScreenState extends State<ControlScreen> {
   Widget _statsCard(IconData icon, String label, String value) {
     return Container(
       padding: const EdgeInsets.all(12),
+      // ignore: deprecated_member_use
       decoration: BoxDecoration(color: Colors.black.withOpacity(0.3), borderRadius: BorderRadius.circular(12)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [Icon(icon, color: Colors.white), const SizedBox(width: 8), Text(label, style: const TextStyle(color: Colors.white70))]),
@@ -72,16 +76,17 @@ class _ControlScreenState extends State<ControlScreen> {
             _joyOffset = Offset.fromDirection(_joyOffset.direction, _joyMax);
           }
           // Send continuous command (directional)
-          final dx = _joyOffset.dx / _joyMax * 100;
-          final dy = -_joyOffset.dy / _joyMax * 100; // invert Y to match typical forward = up
+          final dx = _joyOffset.dx ;
+          final dy = -_joyOffset.dy; // invert Y to match typical forward = up
           _send('JOY ${dx.toStringAsFixed(0)},${dy.toStringAsFixed(0)}');
+          carService.sendCommand(dx, dy);
         });
       },
       onPanEnd: (details) {
         // release -> animate back to center
         setState(() {
           _joyOffset = Offset.zero;
-          _send('JOY_STOP');
+          carService.sendStop();
         });
       },
       child: SizedBox(
@@ -92,6 +97,7 @@ class _ControlScreenState extends State<ControlScreen> {
           Container(
             width: 120,
             height: 120,
+            // ignore: deprecated_member_use
             decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.03), border: Border.all(color: Colors.white.withOpacity(0.06))),
           ),
           // Direction markers
@@ -107,6 +113,7 @@ class _ControlScreenState extends State<ControlScreen> {
               curve: Curves.easeOut,
               width: 48,
               height: 48,
+              // ignore: deprecated_member_use
               decoration: BoxDecoration(color: Colors.grey[700], shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4), blurRadius: 10, offset: const Offset(0, 4))]),
               child: const Icon(Icons.navigation, color: Colors.white, size: 20),
             ),
