@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../services/auth.dart';
+import '../services/auth_service.dart';
 import '../theme.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
+  const LoginScreen({super.key});
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -12,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _userController = TextEditingController();
   final _passController = TextEditingController();
+  final AuthService _authService = AuthService();
+  
   bool _loading = false;
   String? _error;
 
@@ -27,7 +28,10 @@ class _LoginScreenState extends State<LoginScreen> {
       _loading = true;
       _error = null;
     });
-    final ok = await AuthService.login(_userController.text, _passController.text);
+    final ok = await _authService.login(
+      _userController.text,
+      _passController.text,
+    );
     if (!mounted) return;
     setState(() => _loading = false);
     if (ok) {
@@ -51,7 +55,12 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: BoxDecoration(
                 color: theme.cardColor.withOpacity(0.85),
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 12)],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.06),
+                    blurRadius: 12,
+                  ),
+                ],
               ),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 26),
               child: Column(
@@ -61,19 +70,37 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: 72,
                     height: 72,
-                    decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(999)),
-                    child: const Icon(Icons.directions_car, color: Colors.white, size: 36),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: const Icon(
+                      Icons.directions_car,
+                      color: Colors.white,
+                      size: 36,
+                    ),
                   ),
                   const SizedBox(height: 16),
-                  Text('Welcome Back!', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+                  Text(
+                    'Welcome Back!',
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 6),
-                  Text('Log in to continue your adventure.', style: theme.textTheme.bodyMedium),
+                  Text(
+                    'Log in to continue your adventure.',
+                    style: theme.textTheme.bodyMedium,
+                  ),
                   const SizedBox(height: 18),
 
                   // Email
                   TextField(
                     controller: _userController,
-                    decoration: const InputDecoration(labelText: 'Email Address', prefixIcon: Icon(Icons.email)),
+                    decoration: const InputDecoration(
+                      labelText: 'Email Address',
+                      prefixIcon: Icon(Icons.email),
+                    ),
                   ),
                   const SizedBox(height: 12),
                   // Password
@@ -81,7 +108,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _passController,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      suffixIcon: IconButton(onPressed: () {}, icon: const Icon(Icons.visibility)),
+                      suffixIcon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.visibility),
+                      ),
                     ),
                     obscureText: true,
                   ),
@@ -94,11 +124,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: _loading ? null : _doLogin,
-                      child: _loading ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)) : const Text('Log In'),
+                      child: _loading
+                          ? const SizedBox(
+                              height: 18,
+                              width: 18,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                          : const Text('Log In'),
                     ),
                   ),
                   const SizedBox(height: 14),
-                  Row(children: const [Expanded(child: Divider()), SizedBox(width: 8), Text('or'), SizedBox(width: 8), Expanded(child: Divider())]),
+                  Row(
+                    children: const [
+                      Expanded(child: Divider()),
+                      SizedBox(width: 8),
+                      Text('or'),
+                      SizedBox(width: 8),
+                      Expanded(child: Divider()),
+                    ],
+                  ),
                   const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,14 +159,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.apple), label: const SizedBox.shrink()),
+                        child: OutlinedButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.apple),
+                          label: const SizedBox.shrink(),
+                        ),
                       ),
                       const SizedBox(width: 8),
-                      Expanded(child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.facebook), label: const SizedBox.shrink())),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.facebook),
+                          label: const SizedBox.shrink(),
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 16),
-                  TextButton(onPressed: () {}, child: const Text("Don't have an account? Sign Up")),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text("Don't have an account? Sign Up"),
+                  ),
                 ],
               ),
             ),
