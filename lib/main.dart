@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'models/car.dart';
 import 'services/auth.dart';
@@ -9,7 +10,8 @@ import 'screens/cars.dart';
 import 'screens/control.dart';
 import 'theme.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 
@@ -32,7 +34,7 @@ class MainApp extends StatelessWidget {
             '/login': (c) => const LoginScreen(),
             '/home': (c) => const HomeScreen(),
             '/profile': (c) => const ProfileScreen(),
-            '/cars': (c) => const CarsScreen(),
+            '/cars': (c) => CarsScreen(),
           },
           onGenerateRoute: (settings) {
             if (settings.name == '/control') {
