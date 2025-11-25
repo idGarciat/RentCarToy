@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rental History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b8cee",
+              "background-light": "#ffffff",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10">
+<div class="flex size-12 shrink-0 items-center justify-start text-slate-900 dark:text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Rental History</h2>
+<div class="flex size-12 shrink-0 items-center"></div>
+</div>
+<div class="p-4 space-y-6">
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-semibold text-slate-500 dark:text-slate-400">This Month</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<div class="aspect-square w-20 h-20 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+<img alt="Red sports car toy" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhyB07lmlKNWq4w_ef4weE8I0ZpRAAHFUBtTveOPLxtvy6l8KudY2w2_2k1Ei11noeVsBI7XdHnfJLAxezMkZnnYsPYkniOX-H0NEFXQVGKTNhmwi8B-pqO83rdNcqhNtlViAPi0cBBQcFOUUOtwUDlhYGhnmKOA_Ciy-WsVj95wvKVuGvxI0kG1dE5b_GD0E4XdXNDvT1IpchEGmeauhFS36ADFcPrdVFfVOa248k8XFLyC_UlPeo9IGhiUiUMhKlLnE8X3LCaA"/>
+</div>
+<div class="flex flex-col flex-1">
+<p class="font-semibold text-slate-900 dark:text-white">Red Racer GT</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">June 15, 2023 - 45 min</p>
+</div>
+<p class="font-semibold text-slate-900 dark:text-white">$12.50</p>
+</div>
+<div class="flex items-start gap-4">
+<div class="aspect-square w-20 h-20 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+<img alt="Blue monster truck toy" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzhs1TfMcpn5N9l6YA0_YeoqbpaXqAZTlPAzzqfI4aDw7_-LLju46ByWOQ2H8lmKot9i4yEGefWCd3jwYmWFAfNFmlJ6q4xIcBeI86znw4CaEGH4_2cUrkUi-b6YVq08OVGDhsxRj1h47OTjAGtHBRYIsGpuUYPV3Ofcaiyru3TKLMUarlIMwm7ElLM0joNhxi-QivFx-5vmDGo21b-bCTvtE4kJScXj0l8HrzeAOimWhhw6AYXfzWIQJJMlhBws5stnyihljnvA"/>
+</div>
+<div class="flex flex-col flex-1">
+<p class="font-semibold text-slate-900 dark:text-white">Monster Truck X</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">June 10, 2023 - 1 hour</p>
+</div>
+<p class="font-semibold text-slate-900 dark:text-white">$15.00</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-semibold text-slate-500 dark:text-slate-400">May 2023</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<div class="aspect-square w-20 h-20 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+<img alt="Yellow vintage car toy" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzh1EXuY72EDaJCKBtWlhuji48FjbTlIemVs_Lz1xSEnaBs43BUcTm5GhiF977WAygqlaWWjF9I7242oMKm4AdV0Hg-7oZUPIOqiYUV65A_TlcFBN79OAv1Rj0ll5uk0lQuVrlFAKc1gjrOGB5Z-30xjthWzzgaSiNFPJle77gWb6CCsitws47fFlSu9J6zyx9TjoKuxoUorySJ4l-h05BmglQkp57qmFlBVp4BkVnoSrfZjSBMqtvlHzIYuf-NF3R7xmBNDHT4w"/>
+</div>
+<div class="flex flex-col flex-1">
+<p class="font-semibold text-slate-900 dark:text-white">Classic Cruiser</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">May 28, 2023 - 30 min</p>
+</div>
+<p class="font-semibold text-slate-900 dark:text-white">$8.00</p>
+</div>
+<div class="flex items-start gap-4">
+<div class="aspect-square w-20 h-20 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+<img alt="Green off-road jeep toy" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo0n6yRaHu9mlLeJJ3gux3zmPYH4GaXsqSg16xUJ2jv5snOTrqcyNeJqj-zz-_wMZsT0jd8IXafWpXcLexZnQKJeu7oiqglMdTGHE1chDorOKwK4EXV7WryzlWyyxBzm82_e4qyg9UtUBvh8NmRICq6i3eqdJhqi6UtZYCTFbXTlOg-iKQ69y3mCEJycM8MTK8iPQRCegnfQ9k9mcMvSrTpSlHosTSRFcl1D9pQwEiYlnkVb8SuJrKvtqOB6sEqWW1xsYAdn-Z9A"/>
+</div>
+<div class="flex flex-col flex-1">
+<p class="font-semibold text-slate-900 dark:text-white">Off-Road Explorer</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">May 12, 2023 - 2 hours</p>
+</div>
+<p class="font-semibold text-slate-900 dark:text-white">$25.00</p>
+</div>
+<div class="flex items-start gap-4">
+<div class="aspect-square w-20 h-20 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+<img alt="Police car toy" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwKsRnYBLomxF-aZGZ4poV8Ah80EshNmUEwUQjJ6Q01w2CJEaHdVq-GMDeytl3J5vdKRLUioGMpRh-OPHXTg5ZzeypDWd5MtPGQdFF2UNeQUTm5m6Yry23g4WE73-nx294BVd_YSM9TlS7HutiCd1ETKXANktedQmHA2t2mjqptIlunUwhw9I9P-JEN9she6I8-o-191deySKXtC5W4P1FPLbLQuVvQnKy-Xvtb1cHsrRynzsugjA0-e_ln89vnMg_qukEaJqvAQ"/>
+</div>
+<div class="flex flex-col flex-1">
+<p class="font-semibold text-slate-900 dark:text-white">Police Interceptor</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">May 5, 2023 - 1 hour</p>
+</div>
+<p class="font-semibold text-slate-900 dark:text-white">$15.00</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

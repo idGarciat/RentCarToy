@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Confirm Payment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b8cee",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10">
+<button class="text-stone-900 dark:text-stone-100 flex size-10 shrink-0 items-center justify-center rounded-full">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="text-stone-900 dark:text-stone-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Confirm Payment</h1>
+<div class="size-10 shrink-0"></div> <!-- Spacer for centering title -->
+</header>
+<main class="flex flex-col grow px-4">
+<!-- Icon -->
+<div class="flex justify-center items-center py-8">
+<div class="flex items-center justify-center size-24 bg-primary/20 rounded-full text-primary">
+<span class="material-symbols-outlined" style="font-size: 48px;">qr_code_scanner</span>
+</div>
+</div>
+<!-- HeadlineText -->
+<h2 class="text-stone-900 dark:text-stone-100 tracking-light text-[40px] font-bold leading-tight text-center">$5.00</h2>
+<p class="text-stone-500 dark:text-stone-400 text-center text-sm mb-8">Total Rental Cost</p>
+<!-- Summary Card -->
+<div class="w-full bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 p-1">
+<!-- DescriptionList -->
+<div class="p-4">
+<div class="flex justify-between gap-x-6 py-3 border-b border-stone-100 dark:border-stone-800">
+<p class="text-stone-500 dark:text-stone-400 text-sm font-normal leading-normal">Car ID</p>
+<p class="text-stone-900 dark:text-stone-100 text-sm font-medium leading-normal text-right">Car #B-42</p>
+</div>
+<div class="flex justify-between gap-x-6 py-3">
+<p class="text-stone-500 dark:text-stone-400 text-sm font-normal leading-normal">Rental Duration</p>
+<p class="text-stone-900 dark:text-stone-100 text-sm font-medium leading-normal text-right">15 Minutes</p>
+</div>
+</div>
+<hr class="border-stone-100 dark:border-stone-800"/>
+<!-- ListItem -->
+<div class="flex items-center gap-4 px-4 min-h-16 justify-between">
+<div class="flex items-center gap-4">
+<img class="h-6 w-10 shrink-0 object-contain" data-alt="Visa logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqJih1H7YjqtNTt81V9gE0G8mMZQJnXNwnY7FFNAGvIKVDzFmdsvzosV7L7PXhfD0m5yQhkQ9AniXvZo2n_c56ZJgmkLSKP5nuOciaXSWQp_5_wRxiXfCMuzpODvuCmwSYJDgAgRHcw7JiCROUegfTElTi--gFv9DkiGRbDABM1lUbaAzXU7hGC_6OL6RFptVOhjphSqS1PyVJRBYjhOovMyKd8u4pZYbv_PrgiHJeGm0JcYEyZi3PthwcPnphzGGxgUNweTzYtA"/>
+<p class="text-stone-900 dark:text-stone-100 text-base font-normal leading-normal flex-1 truncate">Paying with **** 1234</p>
+</div>
+<div class="shrink-0"><button class="text-primary text-sm font-medium leading-normal">Change</button></div>
+</div>
+</div>
+<!-- Spacer -->
+<div class="flex-grow"></div>
+<!-- Confirmation Message -->
+<p class="text-stone-500 dark:text-stone-400 text-sm text-center py-4">You are about to rent Car #B-42 for 15 minutes.</p>
+<!-- Bottom CTA Button -->
+<div class="py-4 sticky bottom-0 bg-background-light dark:bg-background-dark">
+<button class="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-center text-base font-bold text-white shadow-sm hover:bg-primary/90">
+<span class="material-symbols-outlined">flag</span>
+                    Confirm &amp; Start Race
+                </button>
+</div>
+</main>
+</div>
+</body></html>

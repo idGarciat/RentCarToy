@@ -13,7 +13,27 @@ class User {
       name: json['name'],
       username: json['username'],
       email: json['email'],
-      roles: json['roles']
+      roles: json['roles'],
     );
+  }
+
+  User copyWith({String? id, String? name, String? username, String? email, String? roles}) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      username: username ?? this.username,
+      email: email ?? this.email,
+      roles: roles ?? this.roles,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'username': username,
+      'email': email,
+      'roles': roles,
+    };
   }
 }

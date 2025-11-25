@@ -332,7 +332,7 @@ class _ControlScreenState extends State<ControlScreen> {
             // Center: End Session (smaller)
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red[600],
+                        backgroundColor: Colors.red[600],
                 padding: const EdgeInsets.symmetric(
                   horizontal: 18,
                   vertical: 12,

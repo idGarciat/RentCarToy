@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Toy Car Rental Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-white">
+<div class="relative flex h-auto min-h-screen w-full flex-col font-display group/design-root overflow-x-hidden">
+<div class="flex items-center bg-white p-4 pb-2 justify-between sticky top-0 z-10">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture of Alex" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4XSNyt852lUB-saOWLr06O6Yx2_64IiKF3MjiYPCmhOBMaW81B0lUUbUP4EL4mPkEGflHJdB4dmsWETdtvYAdIlW92RrcFakiXqMpVpNGQXQ5MwvTP7wygLCVrNJN2r2FVB-hCGa5Z3PPLdls4FZ_4y69nwe4pwAfr_6DnJBylLg4vUxaGs8FvdoziMebIw6BOwlxdz6kZoWLzngZC1yhN81eqqXBsYhbFEiv1r72T0GkxTVUMc5gcSch5YijgcfmHSA3Ft-n-g");'></div>
+<h2 class="text-slate-900 text-lg font-bold leading-tight tracking-[-0.015em]">Hi, Alex!</h2>
+</div>
+<div class="flex w-12 items-center justify-end">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full size-10 bg-slate-100 text-slate-900 gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+</button>
+</div>
+</div>
+<div class="px-4 py-3">
+<div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden rounded-xl min-h-[280px]" data-alt="A sleek, modern blue toy car on a dark background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDzM1ec-DWEid1QXLh4Xi8nU6tOVQCPszu1iGXrNjIUG_72mW5LxgGwiHct63EWCd_xz24jwtomGEMRKtDe_rkhs1AFgh2EyS7CmGcSn75tbh1GzalwM7HW3B1w0z4vtcDiuY6_4cA92zZ5DUEdeqRWK3UKh3w0SGvQRqW9rS-F4Wfd9fqVhNCR7Vx8BWwOmTs7HofEBuZtrEHChQib9CWpHBIyeYQ7sKybK97z-vivOVXqTCEYQCd4JDbdN_v_gRb_2jUUAO7J2g");'>
+<div class="p-6 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
+<h1 class="text-white text-2xl font-bold leading-tight tracking-[-0.015em]">Ready for an Adventure?</h1>
+<p class="text-slate-300 text-sm font-normal leading-normal mt-1">Rent and control your favorite toy cars instantly.</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+<div class="flex flex-1 gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 flex-col hover:border-primary/50 transition-colors duration-200">
+<span class="material-symbols-outlined text-primary text-3xl">electric_car</span>
+<div class="flex flex-col gap-1 mt-1">
+<h2 class="text-slate-900 text-base font-bold leading-tight">Available Cars</h2>
+<p class="text-slate-500 text-sm font-normal leading-normal">Find a ride near you</p>
+</div>
+</div>
+<div class="flex flex-1 gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 flex-col hover:border-primary/50 transition-colors duration-200">
+<span class="material-symbols-outlined text-primary text-3xl">person</span>
+<div class="flex flex-col gap-1 mt-1">
+<h2 class="text-slate-900 text-base font-bold leading-tight">User Profile</h2>
+<p class="text-slate-500 text-sm font-normal leading-normal">View your rental history</p>
+</div>
+</div>
+<div class="flex flex-1 gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 flex-col hover:border-primary/50 transition-colors duration-200">
+<span class="material-symbols-outlined text-primary text-3xl">settings</span>
+<div class="flex flex-col gap-1 mt-1">
+<h2 class="text-slate-900 text-base font-bold leading-tight">Settings</h2>
+<p class="text-slate-500 text-sm font-normal leading-normal">Manage your preferences</p>
+</div>
+</div>
+</div>
+<h3 class="text-slate-900 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Current Rental</h3>
+<div class="p-4 pt-0">
+<div class="flex flex-col sm:flex-row items-stretch justify-between gap-4 rounded-xl bg-slate-50 p-4 shadow-sm border border-slate-200">
+<div class="flex flex-col gap-4 flex-[2_2_0px]">
+<div class="flex flex-col gap-1">
+<p class="text-slate-500 text-sm font-normal leading-normal">Active Rental</p>
+<p class="text-slate-900 text-base font-bold leading-tight">RC Speedster X</p>
+<p class="text-slate-500 text-sm font-normal leading-normal">Time remaining: 02:30:15</p>
+</div>
+<button class="flex min-w-[84px] w-full sm:w-fit max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-medium leading-normal">
+<span class="truncate">Control Car</span>
+</button>
+</div>
+<div class="w-full sm:flex-1 bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="A red and black toy race car" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC9GCZ_r_P8xNIYybkQ9hzTZnS0kdsImKV95l108GgE7K_BbuR02h1Wzm9ZBo7i-J-bWI9IK-O8tnTqDp76rJLNUyCWzCggrR8ZnZwLpmqHr0FGNjfhTApezxHBRjnOCHjK0OXrL5fBlTGzCQ-4WoXhYYJFhyueFZGfyEbrGkNCLhKZrohH66ZPP3dNu3ghrhRqYM6YwynF1L2slW1GEARhQo_cSROmvK3tTeVl1JduACxMNrroC379Wc38UORIxQ34KKHoys1bQA");'></div>
+</div>
+</div>
+<div class="sticky bottom-0 mt-auto bg-white/80 backdrop-blur-sm border-t border-slate-200 p-2">
+<div class="grid grid-cols-3 gap-2">
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg p-2 text-primary bg-primary/20">
+<span class="material-symbols-outlined">home</span>
+<span class="text-xs font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg p-2 text-slate-500 hover:bg-slate-100">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-xs font-medium">Map</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg p-2 text-slate-500 hover:bg-slate-100">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-medium">Profile</span>
+</button>
+</div>
+</div>
+</div>
+
+</body></html>
