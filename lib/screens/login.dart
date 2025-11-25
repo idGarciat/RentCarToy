@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import '../services/auth_service.dart';
 import '../theme.dart';
 
@@ -15,6 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   
   bool _loading = false;
   String? _error;
+  bool _obscure = true;
 
   @override
   void dispose() {
@@ -37,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (ok) {
       Navigator.of(context).pushReplacementNamed('/home');
     } else {
-      setState(() => _error = 'Please enter a username');
+      setState(() => _error = 'Login failed — check credentials');
     }
   }
 
@@ -94,26 +96,41 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 18),
 
-                  // Email
+                  // Email or Username
                   TextField(
                     controller: _userController,
-                    decoration: const InputDecoration(
-                      labelText: 'Email Address',
-                      prefixIcon: Icon(Icons.email),
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your email or username',
+                      prefixIcon: const Icon(Icons.person),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      filled: true,
                     ),
                   ),
                   const SizedBox(height: 12),
                   // Password
                   TextField(
                     controller: _passController,
+                    obscureText: _obscure,
                     decoration: InputDecoration(
-                      labelText: 'Password',
+                      hintText: 'Enter your password',
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      filled: true,
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                       suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.visibility),
+                        onPressed: () => setState(() => _obscure = !_obscure),
+                        icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off),
                       ),
                     ),
-                    obscureText: true,
+                  ),
+                  const SizedBox(height: 6),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                        onPressed: () => Navigator.of(context).pushNamed('/forgot'),
+                      style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+                      child: const Text('Forgot Password?'),
+                    ),
                   ),
                   if (_error != null) ...[
                     const SizedBox(height: 8),
@@ -122,8 +139,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 18),
                   SizedBox(
                     width: double.infinity,
+                    height: 52,
                     child: ElevatedButton(
                       onPressed: _loading ? null : _doLogin,
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        backgroundColor: AppColors.primary,
+                        textStyle: const TextStyle(fontWeight: FontWeight.w600),
+                      ),
                       child: _loading
                           ? const SizedBox(
                               height: 18,
@@ -136,49 +159,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           : const Text('Log In'),
                     ),
                   ),
-                  const SizedBox(height: 14),
-                  Row(
-                    children: const [
-                      Expanded(child: Divider()),
-                      SizedBox(width: 8),
-                      Text('or'),
-                      SizedBox(width: 8),
-                      Expanded(child: Divider()),
-                    ],
-                  ),
+                  const SizedBox(height: 10),
                   const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.g_mobiledata),
-                          label: const SizedBox.shrink(),
-                        ),
+                  Center(
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(text: "Don't have an account? ", style: TextStyle(color: Colors.grey[600])),
+                          TextSpan(
+                            text: 'Sign Up',
+                            style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
+                            recognizer: TapGestureRecognizer()..onTap = () => Navigator.of(context).pushNamed('/register'),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.apple),
-                          label: const SizedBox.shrink(),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.facebook),
-                          label: const SizedBox.shrink(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text("Don't have an account? Sign Up"),
+                    ),
                   ),
                 ],
               ),

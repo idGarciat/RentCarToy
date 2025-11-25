@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Toy Car Rental App</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-white font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="flex items-center bg-white p-4 pb-2 justify-between sticky top-0 z-10 border-b border-zinc-100">
+<div class="flex size-12 shrink-0 items-center justify-start">
+</div>
+<h1 class="text-zinc-900 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Find a Car</h1>
+<div class="flex w-12 items-center justify-end">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-zinc-900 gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+<span class="material-symbols-outlined text-2xl">tune</span>
+</button>
+</div>
+</div>
+<div class="flex px-4 py-3">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl object-cover shadow-lg" data-alt="A map showing the location of available toy cars with pins." data-location="City Center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB6SN837pj5P84hBgRHH17Kw2t__blUyqNGfHHa2Yi9HJFtSuP5AhnFaE1R1eMfjMOcec47uhKHwefAipiGfTb6mGKZSB9-rstiP5dYOkAEJ_As6OiLKz81BhAU0kRmXzDYi4vDwPkn3icSNgaveiynmdHeLdTB6U2Bc5AdokP7OtK6mt0bGjlBPf8efDcVeIk0iMmmksB04lD6xNGkrnIGUDbJSa0njO6Gco0hHLSxd7QlzinbIIVB72wmBICmQAbcIZBN5efBqw");'></div>
+</div>
+<div class="px-4 py-3">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-zinc-500 flex border-none bg-zinc-100 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-2xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-zinc-900 focus:outline-0 focus:ring-0 border-none bg-zinc-100 focus:border-none h-full placeholder:text-zinc-500 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search for a specific car model" value=""/>
+</div>
+</label>
+</div>
+<div class="p-4 pt-1">
+<div class="flex items-stretch justify-between gap-4 rounded-xl bg-zinc-100/50 p-4 shadow-sm">
+<div class="flex flex-[2_2_0px] flex-col justify-between gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-green-500">battery_full</span>
+<p class="text-zinc-600 text-sm font-normal leading-normal">Battery: 92%</p>
+</div>
+<p class="text-zinc-900 text-base font-bold leading-tight">CyberRacer X1</p>
+<p class="text-zinc-600 text-sm font-normal leading-normal">50m away · $0.30/min</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal w-fit">
+<span class="truncate">Rent Now</span>
+</button>
+</div>
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1" data-alt="A futuristic, sleek, silver toy race car called CyberRacer X1." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzFsjt8HK6c5BCAq3qbWa53b-HUSeTriokT52yeeZio40ej19-JF66fnVofXuH2pAuvQuuOBbY9Q09deLnTvna2I4DGNGcMMLhJzySb7J2B7L1YelehQVuy2vE2YvcuGRiGFmmeojAOXPAEq3sUDC5D49dcKVtMX0OBybi3Td_uMyP5jSNp3rM5dFS5cZk1Q9Ct7cM4LPKHA2bH4Y2oKHG9TJ_VkahC1fV_lkj6CesxE60jfyHwjnd8kTpDvVGucNNGIWoGlJzvQ");'></div>
+</div>
+</div>
+<div class="p-4 pt-1">
+<div class="flex items-stretch justify-between gap-4 rounded-xl bg-zinc-100/50 p-4 shadow-sm">
+<div class="flex flex-[2_2_0px] flex-col justify-between gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-yellow-500">battery_horiz_075</span>
+<p class="text-zinc-600 text-sm font-normal leading-normal">Battery: 75%</p>
+</div>
+<p class="text-zinc-900 text-base font-bold leading-tight">Nitro Buggy</p>
+<p class="text-zinc-600 text-sm font-normal leading-normal">120m away · $0.25/min</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal w-fit">
+<span class="truncate">Rent Now</span>
+</button>
+</div>
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1" data-alt="A rugged, off-road orange toy buggy with large wheels." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAt0ZDTWs4xHEUHzkZshE8yIx-e3BhBGJJENui-jwhMNOFxrOAEJYuPKu3QBIKNtDnUEM8vKHzeS1srQAj9mrF6QCt2Jo990S99ADR8pBzZpWTfEitJdzDShNvRSxlJXKcaCNVr3NjTOOwojlG9EE6xQd66TKNkNNFAWCfcMB0-dH9RypJlxuzVLdAtDvWgcONSeCoK0sdkc3kCTSjLYc8JcwpRL4hZ1WPXbQrbgFFvliFB1VS9sl5uGYmF0ROK21ggnWhaMHvaJA");'></div>
+</div>
+</div>
+<div class="p-4 pt-1">
+<div class="flex items-stretch justify-between gap-4 rounded-xl bg-zinc-100/50 p-4 shadow-sm">
+<div class="flex flex-[2_2_0px] flex-col justify-between gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-red-500">battery_alert</span>
+<p class="text-zinc-600 text-sm font-normal leading-normal">Battery: 25%</p>
+</div>
+<p class="text-zinc-900 text-base font-bold leading-tight">Street Phantom</p>
+<p class="text-zinc-600 text-sm font-normal leading-normal">250m away · $0.20/min</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal w-fit">
+<span class="truncate">Rent Now</span>
+</button>
+</div>
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1" data-alt="A low-profile, black toy sports car with red accents." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAi-KxYcSnlWEzM4LQoUSKx-dR2MbT-rwvvgINT9k1egwdZIpNIWT85Q5jwWz2q6P8hCdPbZ5gubJI6S_xH5HPolYuhKzUvRPgtZ8i_yvSjfGX75pyoGkJ4A2XBj3MHfsQ_g0F8KsCnokZCN-LZcDN8eGzS9fYZoc-GPNiY1qGJ8no56beSDTObIGew07CXdJFy1xDVyp51_MyN4glSM6sUy-v488gUmWj8xZd4NwBMkr7Xx7Ea_sUw7-4pvDT38i6Rn0VfxdFxrQ");'></div>
+</div>
+</div>
+</div>
+
+</body></html>

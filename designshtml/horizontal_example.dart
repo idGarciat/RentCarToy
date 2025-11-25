@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class HorizontalScreen extends StatefulWidget {
+  const HorizontalScreen({super.key});
+
   @override
   _HorizontalScreenState createState() => _HorizontalScreenState();
 }
