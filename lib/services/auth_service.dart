@@ -18,9 +18,10 @@ class AuthService {
   bool get isLogged => user.value != null;
 
   Future<bool> login(String identifier, String password) async {
+    print('$password, $identifier');
     try {
       final url = Uri.parse('$_baseUrl/auth/login');
-      final body = {"identifier": identifier, "password": password};
+      final body = {"email": identifier, "password": password};
 
       final response = await http.post(
         url,

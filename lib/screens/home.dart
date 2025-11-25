@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(14),
                       image: const DecorationImage(
-                        image: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuDzM1ec-DWEid1QXLh4Xi8nU6tOVQCPszu1iGXrNjIUG_72mW5LxgGwiHct63EWCd_xz24jwtomGEMRKtDe_rkhs1AFgh2EyS7CmGcSn75tbh1GzalwM7HW3B1w0z4vtcDiuY6_4cA92zZ5DUEdeqRWK3UKh3w0SGvQRqW9rS-F4Wfd9fqVhNCR7Vx8BWwOmTs7HofEBuZtrEHChQib9CWpHBIyeYQ7sKybK97z-vivOVXqTCEYQCd4JDbdN_v_gRb_2jUUAO7J2g'),
+                        image: NetworkImage('http://192.168.100.35:3000/files/images/uploads/car2.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           flex: 1,
-                          child: Container(height: 110, decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: const DecorationImage(image: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuC9GCZ_r_P8xNIYybkQ9hzTZnS0kdsImKV95l108GgE7K_BbuR02h1Wzm9ZBo7i-J-bWI9IK-O8tnTqDp76rJLNUyCWzCggrR8ZnZwLpmqHr0FGNjfhTApezxHBRjnOCHjK0OXrL5fBlTGzCQ-4WoXhYYJFhyueFZGfyEbrGkNCLhKZrohH66ZPP3dNu3ghrhRqYM6YwynF1L2slW1GEARhQo_cSROmvK3tTeVl1JduACxMNrroC379Wc38UORIxQ34KKHoys1bQA'), fit: BoxFit.cover))),
+                          child: Container(height: 110, decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), image: const DecorationImage(image: NetworkImage('http://192.168.100.35:3000/files/images/uploads/car1.png'), fit: BoxFit.cover))),
                         )
                       ],
                     ),

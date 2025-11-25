@@ -49,7 +49,7 @@ class _CarsScreenState extends State<CarsScreen> {
                 },
               );
             });
-            
+
             return const SizedBox.shrink();
           }
 
@@ -70,7 +70,9 @@ class _CarsScreenState extends State<CarsScreen> {
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.search),
                     hintText: 'Search cars...',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     filled: true,
                     fillColor: Theme.of(context).cardColor,
                   ),
@@ -82,9 +84,12 @@ class _CarsScreenState extends State<CarsScreen> {
                       } else {
                         _filteredCars = _allCars.where((c) {
                           final name = c.name.toLowerCase();
-                          final desc = (c.description ?? '').toLowerCase();
+                          final desc = (c.description).toLowerCase();
                           final loc = (c.store?.location ?? '').toLowerCase();
-                          return name.contains(query) || desc.contains(query) || loc.contains(query);
+                          final image = (c.image);
+                          return name.contains(query) ||
+                              desc.contains(query) ||
+                              loc.contains(query);
                         }).toList();
                       }
                     });
@@ -103,7 +108,12 @@ class _CarsScreenState extends State<CarsScreen> {
                       decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(12),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 8,
+                          ),
+                        ],
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(12),
@@ -111,42 +121,89 @@ class _CarsScreenState extends State<CarsScreen> {
                           children: [
                             Expanded(
                               flex: 2,
-                              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                // Price and location (model doesn't provide battery)
-                                Row(children: [
-                                  const Icon(Icons.monetization_on, color: Colors.green),
-                                  const SizedBox(width: 6),
-                                  Text('\$${car.price.toStringAsFixed(2)}', style: const TextStyle(color: Colors.grey)),
-                                  const SizedBox(width: 12),
-                                  const Icon(Icons.location_on, color: Colors.grey),
-                                  const SizedBox(width: 6),
-                                  Expanded(child: Text(car.store?.location ?? 'Unknown', style: const TextStyle(color: Colors.grey))),
-                                ]),
-                                const SizedBox(height: 8),
-                                Text(car.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                                const SizedBox(height: 4),
-                                Text(car.description, style: const TextStyle(color: Colors.grey)),
-                                const SizedBox(height: 8),
-                                Row(children: [
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-                                    onPressed: () => Navigator.of(context).pushNamed('/control', arguments: car),
-                                    child: const Text('Control'),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Price and location (model doesn't provide battery)
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.monetization_on,
+                                        color: Colors.green,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        '\$${car.price.toStringAsFixed(2)}',
+                                        style: const TextStyle(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                      const Icon(
+                                        Icons.location_on,
+                                        color: Colors.grey,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Expanded(
+                                        child: Text(
+                                          car.store?.location ?? 'Unknown',
+                                          style: const TextStyle(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(width: 8),
-                                  OutlinedButton(onPressed: () {}, child: const Text('Details')),
-                                ])
-                              ]),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    car.name,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    car.description,
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: AppColors.primary,
+                                        ),
+                                        onPressed: () => Navigator.of(
+                                          context,
+                                        ).pushNamed('/control', arguments: car),
+                                        child: const Text('Control'),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      OutlinedButton(
+                                        onPressed: () {},
+                                        child: const Text('Details'),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
                               flex: 1,
                               child: Container(
-                                height: 90,
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xFFF6F7F8)),
-                                child: const SizedBox.shrink(),
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(14),
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      _carService.getUrlImage(car.image)
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
