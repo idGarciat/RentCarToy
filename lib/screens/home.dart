@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rentcar/auth/auth.dart';
 import 'package:rentcar/classes/session_manager.dart';
 import '../services/auth_service.dart';
+import '../services/cars_service.dart';
+import '../models/car.dart';
 import '../theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,6 +24,88 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadSession();
   }
 
+  Widget _buildCarsList(List<Car> cars) {
+    if (cars.isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.symmetric(vertical: 12.0),
+        child: Center(child: Text('No hay coches disponibles')),
+      );
+    }
+
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: cars.length,
+      separatorBuilder: (_, __) => const SizedBox(height: 8),
+      itemBuilder: (context, i) {
+        final c = cars[i];
+        return Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
+          ),
+          child: Row(
+            children: [
+              // Thumbnail
+              Container(
+                width: 84,
+                height: 64,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: const Color(0xFFF6F7F8),
+                  image: c.image.isNotEmpty
+                      ? DecorationImage(
+                          image: NetworkImage(c.image),
+                          fit: BoxFit.cover,
+                        )
+                      : null,
+                ),
+                child: c.image.isEmpty ? const Icon(Icons.directions_car, color: Colors.grey) : null,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Row(children: [
+                    Expanded(child: Text(c.name, style: const TextStyle(fontWeight: FontWeight.bold))),
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: c.is_avaible ? Colors.green.shade50 : Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(c.is_avaible ? 'Available' : 'Not available', style: TextStyle(color: c.is_avaible ? Colors.green : Colors.grey, fontSize: 12)),
+                    ),
+                  ]),
+                  const SizedBox(height: 6),
+                  Text(c.description, style: const TextStyle(color: Colors.grey)),
+                  const SizedBox(height: 6),
+                  Row(children: [
+                    const Icon(Icons.location_on, size: 14, color: Colors.grey),
+                    const SizedBox(width: 4),
+                    Expanded(child: Text(c.store?.location ?? 'Unknown', style: const TextStyle(color: Colors.grey, fontSize: 12))),
+                  ])
+                ]),
+              ),
+              const SizedBox(width: 12),
+              Column(children: [
+                Text('\$${c.price.toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+                  onPressed: c.is_avaible ? () => Navigator.of(context).pushNamed('/payment_qr', arguments: c) : null,
+                  child: const Text('Control'),
+                )
+              ])
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> _loadSession() async {
     auth = await _sessionManager.getSession();
     setState(() {});
@@ -33,10 +117,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Column(
-              children: [
+          SingleChildScrollView(
+            child: Container(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: Column(
+                children: [
                 // Header
                 SafeArea(
                   child: Padding(
@@ -137,6 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(height: 6),
                             const Text('Time remaining: 02:30:15', style: TextStyle(color: Colors.grey)),
                             const SizedBox(height: 10),
+                            const Text('Este es solo un place holder', style: TextStyle(color: Colors.grey)),
+                            const SizedBox(height: 10),
                             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary), onPressed: () => Navigator.of(context).pushNamed('/control'), child: const Text('Control Car'))
                           ]),
                         ),
@@ -150,10 +237,53 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
+                const SizedBox(height: 16),
+
+                // All cars (available and not available)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'All Cars',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: FutureBuilder<List<Car>>(
+                    future: CarsService().getCars(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+
+                      if (snapshot.hasError) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                          child: Center(child: Text('Error cargando coches: ${snapshot.error}')),
+                        );
+                      }
+
+                      final cars = snapshot.data ?? [];
+                      return _buildCarsList(cars);
+                    },
+                  ),
+                ),
+
                 const SizedBox(height: 80),
               ],
             ),
           ),
+        ),
 
           // bottom nav (sticky)
           Positioned(
@@ -167,7 +297,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _bottomNavItem(Icons.home, 'Home', true),
-                  _bottomNavItem(Icons.explore, 'Map', false, onTap: () => Navigator.of(context).pushNamed('/cars')), // map placeholder -> cars
+                  _bottomNavItem(Icons.explore, 'Map', false, onTap: () => Navigator.of(context).pushNamed('/map')),
                   _bottomNavItem(Icons.person, 'Profile', false, onTap: () => Navigator.of(context).pushNamed('/profile')),
                 ],
               ),

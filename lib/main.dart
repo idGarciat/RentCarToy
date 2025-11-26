@@ -7,10 +7,12 @@ import 'screens/login.dart';
 import 'screens/home.dart';
 import 'screens/profile.dart';
 import 'screens/cars.dart';
+import 'screens/map.dart';
 import 'screens/control.dart';
 import 'screens/register.dart';
 import 'screens/forgot_password.dart';
 import 'screens/payment_methods.dart';
+import 'screens/payment_qr.dart';
 import 'screens/qr_payment_confirmation.dart';
 import 'screens/rental_history.dart';
 import 'screens/settings.dart';
@@ -41,9 +43,11 @@ class MainApp extends StatelessWidget {
             '/home': (c) => HomeScreen(),
             '/profile': (c) =>ProfileScreen(),
             '/cars': (c) => CarsScreen(),
+            '/map': (c) => const MapScreen(),
             '/register': (c) => const RegisterScreen(),
             '/forgot': (c) => const ForgotPasswordScreen(),
             '/payment': (c) => const PaymentMethodsScreen(),
+            '/payment_qr': (c) => const PaymentQrScreen(),
             '/qrconfirm': (c) => const QrPaymentConfirmationScreen(),
             '/history': (c) => const RentalHistoryScreen(),
             '/settings': (c) => const SettingsScreen(),

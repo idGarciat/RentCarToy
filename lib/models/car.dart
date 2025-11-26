@@ -79,13 +79,19 @@ class Car {
 
   factory Car.fromJson(Map<String, dynamic> json) {
     return Car(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      image: json['image'],
-      ip: json['ip'],
-      price: json['price'],
-      is_avaible: json['is_avaible'],
+      id: json['id']?.toString() ?? '',
+      name: json['name']?.toString() ?? '',
+      description: json['description']?.toString() ?? '',
+      image: json['image']?.toString() ?? '',
+      ip: json['ip']?.toString() ?? '',
+      price: json['price'] is num
+          ? (json['price'] as num).toDouble()
+          : double.tryParse(json['price']?.toString() ?? '') ?? 0.0,
+      is_avaible: json['is_avaible'] == null
+          ? false
+          : (json['is_avaible'] is bool
+              ? json['is_avaible'] as bool
+              : (json['is_avaible'].toString() == '1' || json['is_avaible'].toString().toLowerCase() == 'true')),
       store: json['store'] != null ? Store.fromJson(json['store']) : null,
     );
   }

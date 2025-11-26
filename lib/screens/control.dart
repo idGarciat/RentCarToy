@@ -223,7 +223,7 @@ class _ControlScreenState extends State<ControlScreen> {
         error: (context, error, stackTrace) {
           return Center(
             child: Text(
-              'Error loading video stream.',
+              'No hay video we',
               style: TextStyle(
                 // ignore: deprecated_member_use
                 color: Colors.white.withOpacity(0.8),
@@ -306,7 +306,7 @@ class _ControlScreenState extends State<ControlScreen> {
       right: 20,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [_statsCard(Icons.speed, 'Speed', '15 KM/H')],
+        children: [_statsCard(Icons.speed, 'Speed', '-')],
       ),
     );
 

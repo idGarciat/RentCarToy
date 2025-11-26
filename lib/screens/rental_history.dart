@@ -3,7 +3,7 @@ import '../theme.dart';
 
 class RentalHistoryScreen extends StatelessWidget {
   const RentalHistoryScreen({super.key});
-
+//Esto son solo placeholders de items, no hay backend ni nada implementado aun
   @override
   Widget build(BuildContext context) {
     // sample items similar to HTML
