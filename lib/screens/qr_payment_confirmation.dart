@@ -38,11 +38,12 @@ class QrPaymentConfirmationScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 child: Column(
                   children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const Text('Car ID', style: TextStyle(color: Colors.grey)), Text(car?.id ?? 'Unknown')]),
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const Text('Car ID', style: TextStyle(color: Colors.grey)), Text(/*car?.id ??*/ 'Unknown')]),//Actualmente muestra la ID pero encriptada, cambiar eso. o no
                     const Divider(),
                     Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: const [Text('Rental Duration', style: TextStyle(color: Colors.grey)), Text('15 Minutes')]),
                     const SizedBox(height: 8),
                     Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const Text('Paying with', style: TextStyle(color: Colors.grey)), const Text('**** 1234')]),
+                    const SizedBox(height: 8),
                   ],
                 ),
               ),

@@ -8,12 +8,15 @@ import 'package:rentcar/models/car.dart';
 import 'package:http/http.dart' as http;
 
 class CarsService {
-  DateTime lastSend = DateTime.now().subtract(const Duration(milliseconds: 200));
+  DateTime lastSend = DateTime.now().subtract(
+    const Duration(milliseconds: 200),
+  );
 
   final _baseUrl = dotenv.env['API_URL'];
   String? _ipCar;
-
-  CarsService();
+  int _speed;
+  bool _isForwarding;
+  CarsService() : _speed = 80, _isForwarding = true;
 
   void setIpCar(String ip) {
     _ipCar = ip;
@@ -21,6 +24,27 @@ class CarsService {
 
   String getIpCar() {
     return _ipCar ?? '';
+  }
+
+  void setSpeedCar(int speed) {
+    print('setting velo $speed');
+    if (speed == 50) {
+      _speed = 0;
+      _isForwarding = false;
+    } else if (speed < 50) {
+      _speed = ((speed - 50) / 50 * 255).toInt().abs();
+      // _speed = _speed <= 0 ? 100 : _speed;
+      _isForwarding = false;
+      print('setting speed backward $_speed');
+    } else {
+      _speed = ((-50 + speed) / 50 * 255).toInt();
+      _isForwarding = true;
+      print('setting speed forward $_speed');
+    }
+  }
+
+  int getSpeedCar() {
+    return _speed;
   }
 
   Future<List<Car>> getAvaibleCars() async {
@@ -57,7 +81,6 @@ class CarsService {
       request.headers["Accept"] = 'application/json';
       request.headers["Authorization"] = "Bearer $token";
 
-
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
       if (response.statusCode == 200) {
@@ -84,7 +107,6 @@ class CarsService {
       request.headers["Accept"] = 'application/json';
       request.headers["Authorization"] = "Bearer $token";
 
-
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
       if (response.statusCode == 200) {
@@ -101,7 +123,8 @@ class CarsService {
       throw Exception('Error de conexión: $e');
     }
   }
-  void sendStop() async{
+
+  void sendStop() async {
     try {
       final url = Uri.parse("http://$_ipCar/stop?speed=0");
       final response = await http.get(url);
@@ -111,8 +134,8 @@ class CarsService {
     }
   }
 
-  void sendCommand(double x, double y) async {
-    if(DateTime.now().difference(lastSend).inMilliseconds < 150) {
+  void sendDirection(double x, double y) async {
+    if (DateTime.now().difference(lastSend).inMilliseconds < 150) {
       return;
     }
     lastSend = DateTime.now();
@@ -126,12 +149,13 @@ class CarsService {
       y /= 32;
       String command = "stop";
       print('$xt , $yt');
-      
-      if (xt == 0 && yt == 1) {
-        command = "forward";
-      } else if (xt == 0 && yt == -1) {
-        command = "backward";
-      } else if (xt == 1 && yt == 0) {
+
+      // if (xt == 0 && yt == 1) {
+      //   command = "forward";
+      // } else if (xt == 0 && yt == -1) {
+      //   command = "backward";
+      // } else
+      if (xt == 1 && yt == 0) {
         command = "right";
       } else if (xt == -1 && yt == 0) {
         command = "left";
@@ -141,17 +165,28 @@ class CarsService {
         command = "left";
       } else if (xt > 0 && yt < 0) {
         command = "right";
-      } if (xt < 0 && yt < 0) {
+      }
+      if (xt < 0 && yt < 0) {
         command = "left";
       }
 
       final url = Uri.parse("http://$_ipCar/$command?speed=$speed");
       final response = await http.get(url);
       print("RESPUESTA: ${response.body}");
-
     } catch (e) {
       print('Error al enviar el comando: $e');
     }
+  }
+
+  void sendForwarding() async {
+    String command = _isForwarding ? 'forward' : 'backward';
+    final url = Uri.parse("http://$_ipCar/$command?speed=$_speed");
+    final response = await http.get(url);
+    print("RESPUESTA: ${response.body}");
+  }
+
+  String getUrlImage(String image) {
+    return '$_baseUrl/files/images/uploads/$image';
   }
 
   int _normalize(double v) {

@@ -14,12 +14,13 @@ class ControlScreen extends StatefulWidget {
 }
 
 class _ControlScreenState extends State<ControlScreen> {
-  final carService = CarsService();
-  final double _speed = 50;
+  final _carService = CarsService();
+  double _speedValue = 70;
   final List<String> _logs = [];
   final Car? car;
   _ControlScreenState({this.car}) {
-    carService.setIpCar(car?.ip ?? "127.0.0.1");
+    _carService.setIpCar(car?.ip ?? "127.0.0.1");
+    _carService.setSpeedCar(_speedValue.toInt());
   }
 
   // Joystick state for game-like controls
@@ -28,7 +29,7 @@ class _ControlScreenState extends State<ControlScreen> {
 
   void _send(String cmd) {
     final entry =
-        '${DateTime.now().toIso8601String().substring(11, 19)}: $cmd @ speed ${_speed.toStringAsFixed(0)}%';
+        '${DateTime.now().toIso8601String().substring(11, 19)}: $cmd @ speed ${_speedValue.toStringAsFixed(0)}%';
     // print(  entry);
 
     //TODO
@@ -105,14 +106,14 @@ class _ControlScreenState extends State<ControlScreen> {
           final dx = _joyOffset.dx;
           final dy = -_joyOffset.dy; // invert Y to match typical forward = up
           _send('JOY ${dx.toStringAsFixed(0)},${dy.toStringAsFixed(0)}');
-          carService.sendCommand(dx, dy);
+          _carService.sendDirection(dx, dy);
         });
       },
       onPanEnd: (details) {
         // release -> animate back to center
         setState(() {
           _joyOffset = Offset.zero;
-          carService.sendStop();
+          _carService.sendStop();
         });
       },
       child: SizedBox(
@@ -210,7 +211,10 @@ class _ControlScreenState extends State<ControlScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    final stream = 'http://${carService.getIpCar()}:81/stream';
+    final stream = 'http://${_carService.getIpCar()}:81/stream';
+    // slider uses state variable `_speedValue`
+    print(stream);
+
     final background = Positioned.fill(
       child: Mjpeg(
         isLive: true,
@@ -219,9 +223,9 @@ class _ControlScreenState extends State<ControlScreen> {
         error: (context, error, stackTrace) {
           return Center(
             child: Text(
-              'Error loading video stream.',
+              'No hay video we',
               style: TextStyle(
-              // ignore: deprecated_member_use
+                // ignore: deprecated_member_use
                 color: Colors.white.withOpacity(0.8),
                 fontSize: 16,
               ),
@@ -302,7 +306,7 @@ class _ControlScreenState extends State<ControlScreen> {
       right: 20,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [_statsCard(Icons.speed, 'Speed', '15 KM/H')],
+        children: [_statsCard(Icons.speed, 'Speed', '-')],
       ),
     );
 
@@ -332,7 +336,7 @@ class _ControlScreenState extends State<ControlScreen> {
             // Center: End Session (smaller)
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red[600],
+                backgroundColor: Colors.red[600],
                 padding: const EdgeInsets.symmetric(
                   horizontal: 18,
                   vertical: 12,
@@ -355,6 +359,7 @@ class _ControlScreenState extends State<ControlScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  // const SizedBox(width: 12),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -382,7 +387,7 @@ class _ControlScreenState extends State<ControlScreen> {
                             color: Colors.white,
                             size: 24,
                           ),
-                          onPressed: () => _send('BRAKE'),
+                          onPressed: () => _carService.sendDirection(0, 0),
                         ),
                       ),
                     ],
@@ -398,6 +403,7 @@ class _ControlScreenState extends State<ControlScreen> {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
+
                       const SizedBox(height: 6),
                       Container(
                         height: 88,
@@ -412,10 +418,26 @@ class _ControlScreenState extends State<ControlScreen> {
                             color: Colors.white,
                             size: 28,
                           ),
-                          onPressed: () => _send('ACCELERATE'),
+                          onPressed: () =>_carService.sendForwarding(),
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 6),
+                  RotatedBox(
+                    quarterTurns: -1,
+                    child: Slider(
+                      min: 0,
+                      max: 100,
+                      divisions: 10,
+                      value: _speedValue,
+                      onChanged: (double value) {
+                        setState(() {
+                          _speedValue = value;
+                          _carService.setSpeedCar(value.toInt());
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),

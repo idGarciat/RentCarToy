@@ -44,6 +44,7 @@ class PaymentQrScreen extends StatelessWidget {
                     final car = ModalRoute.of(context)?.settings.arguments as Car?;
                     Navigator.of(context).pushNamed('/qrconfirm', arguments: car);
                   },
+                  //actualmente esto te lleva a la otra pantalla, debería implementarse un verdadero pago con qr y que automaticamente redirija a la confirmación
                   child: const Text('Done'),
                 ),
               )
