@@ -130,7 +130,7 @@ class _CarsScreenState extends State<CarsScreen> {
                                 Row(children: [
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-                                    onPressed: () => Navigator.of(context).pushNamed('/control', arguments: car),
+                                    onPressed: () => Navigator.of(context).pushNamed('/payment_qr', arguments: car),
                                     child: const Text('Control'),
                                   ),
                                   const SizedBox(width: 8),
